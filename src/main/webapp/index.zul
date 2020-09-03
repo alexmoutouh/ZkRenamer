@@ -1,0 +1,26 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('org.alex.tuto.zk.VmRenamer')" validationMessages="@id('vmsgs')">
+		<label value="Pattern to replace : "/>
+		<textbox value="@bind(vm.patternToFind)"/>
+		<label value="Replace with : "/>
+		<textbox value="@bind(vm.replaceWith)"/>
+		<button label="Upload" upload="true,maxsize=-1,multiple=true" autodisable="self" onUpload="@command('saveUpload')"/>
+		<button label="Rename" onClick="@command('renameUpload')"/>
+
+        <listbox model="@bind(vm.medias)" width="510px">
+			<listhead>
+				<listheader label="Fichier" width="450px"/>
+				<listheader/>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@bind(each.getName())"/>
+					<listcell>
+						<button onClick="@command('removeUpload', media=each)" 
+							image="/images/cross-icon.png"/>
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>
